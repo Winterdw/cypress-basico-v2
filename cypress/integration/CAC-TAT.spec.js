@@ -13,7 +13,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('#lastName').type("Winter")
         cy.get('#email').type('daniel_winter2009@yahoo.com.br')
         cy.get('#open-text-area').type(longText, {delay: 0})
-        cy.get('button[type="submit"]').click()
+        cy.contains('button', 'Enviar').click()
 
         cy.get('.success').should('be.visible')
     })
@@ -22,7 +22,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('#lastName').type("Winter")
         cy.get('#email').type('daniel_winter2009yahoocombr')
         cy.get('#open-text-area').type('Teste')
-        cy.get('button[type="submit"]').click()
+        cy.contains('button', 'Enviar').click()
 
         cy.get('.error').should('be.visible')
     })
@@ -32,7 +32,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('#email').type('daniel_winter2009@yahoo.com.br')
         cy.get('#phone').type('abcdefghij').should('have.value', '')
         cy.get('#open-text-area').type('Teste')
-        cy.get('button[type="submit"]').click()
+        cy.contains('button', 'Enviar').click()
 
         cy.get('.success').should('be.visible')
     })
@@ -43,7 +43,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('#phone').type('abcdefghij').should('have.value', '')
         cy.get('#phone-checkbox').click()
         cy.get('#open-text-area').type('Teste')
-        cy.get('button[type="submit"]').click()
+        cy.contains('button', 'Enviar').click()
 
         cy.get('.error').should('be.visible')
     })
@@ -53,12 +53,12 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('#email').type('daniel_winter2009@yahoo.com.br').should('have.value', 'daniel_winter2009@yahoo.com.br').clear().should('have.value', '')
         cy.get('#phone').type('123123123').should('have.value', '123123123').clear().should('have.value', '')
         cy.get('#open-text-area').type('Teste')
-        cy.get('button[type="submit"]').click()
+        cy.contains('button', 'Enviar').click()
 
         cy.get('.error').should('be.visible')
     })
     it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function(){
-        cy.get('button[type="submit"]').click()
+        cy.contains('button', 'Enviar').click()
         cy.get('.error').should('be.visible')
     })
     it('envia o formuário com sucesso usando um comando customizado', function(){
