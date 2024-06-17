@@ -41,6 +41,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('#lastName').type("Winter")
         cy.get('#email').type('daniel_winter2009@yahoo.com.br')
         cy.get('#phone').type('abcdefghij').should('have.value', '')
+        cy.get('#phone-checkbox').click()
         cy.get('#open-text-area').type('Teste')
         cy.get('button[type="submit"]').click()
 
