@@ -65,5 +65,14 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.fillMandatoryFieldsAndSubmit()
         cy.get('.success').should('be.visible')
     })
+    it.only('seleciona um produto (YouTube) por seu texto', function(){
+        cy.get('#firstName').type('Daniel')
+        cy.get('#lastName').type("Winter")
+        cy.get('#email').type('daniel_winter2009@yahoo.com.br')
+        cy.get('#product').select('cursos').should('have.value', 'cursos')
+        //cy.get('#open-text-area').type(longText, {delay: 0})
+        //cy.contains('button', 'Enviar').click()
+        //cy.get('.success').should('be.visible')
+    })
   })
   
