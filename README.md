@@ -1,6 +1,6 @@
 # Cypress Basic Test
 
-Sample project to demonstrate a `cy.dataTest` Cypress custom command.
+Sample project to demonstrate a Cypress Basic Test.
 
 ## Pre-requirements
 
