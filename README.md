@@ -1,4 +1,4 @@
-# cy-data-test
+# Cypress Basic Test
 
 Sample project to demonstrate a `cy.dataTest` Cypress custom command.
 
