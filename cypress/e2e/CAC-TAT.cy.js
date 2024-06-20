@@ -4,7 +4,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     beforeEach(function(){
         cy.visit('./src/index.html')
     })
-    it.only('verifica o título da aplicação', function() {
+    it('verifica o título da aplicação', function() {
         cy.title().should('be.equal', 'Central de Atendimento ao Cliente TAT')
     })
     it('preenche os campos obrigatórios e envia o formulário', function(){
@@ -116,11 +116,11 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     it('verifica que a política de privacidade abre em outra aba sem a necessidade de um clique', function(){
         cy.get('a').should('have.attr', 'target', '_blank')
     })
-    it.only('acessa a página da política de privacidade removendo o target e então clicando no link', function(){
+    it('acessa a página da política de privacidade removendo o target e então clicando no link', function(){
         cy.get('a').invoke('removeAttr', 'target').click()
         cy.contains('Talking About Testing').should('be.visible')
     })
-    it.only('testa a página da política de privacidade de forma independente', function(){
+    it('testa a página da política de privacidade de forma independente', function(){
         cy.get('a').invoke('removeAttr', 'target').click()
         cy.contains('CAC TAT - Política de privacidade').should('be.visible')
     })
