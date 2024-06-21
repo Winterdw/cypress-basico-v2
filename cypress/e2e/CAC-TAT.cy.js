@@ -1,6 +1,7 @@
 /// <reference types="Cypress" />
 
 describe('Central de Atendimento ao Cliente TAT', function() {
+    const THREE_SECONDS_IN_MS = 3000
     beforeEach(function(){
         cy.visit('./src/index.html')
     })
@@ -9,15 +10,19 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     })
     it('preenche os campos obrigatórios e envia o formulário', function(){
         const longText = 'Teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste.'
+        cy.clock()
         cy.get('#firstName').type('Daniel')
         cy.get('#lastName').type("Winter")
         cy.get('#email').type('daniel_winter2009@yahoo.com.br')
         cy.get('#open-text-area').type(longText, {delay: 0})
         cy.contains('button', 'Enviar').click()
-
         cy.get('.success').should('be.visible')
+        cy.tick(THREE_SECONDS_IN_MS)
+        cy.get('.success').should('not.be.visible')
+
     })
     it('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', function(){
+        cy.clock()
         cy.get('#firstName').type('Daniel')
         cy.get('#lastName').type("Winter")
         cy.get('#email').type('daniel_winter2009yahoocombr')
@@ -25,8 +30,11 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.contains('button', 'Enviar').click()
 
         cy.get('.error').should('be.visible')
+        cy.tick(THREE_SECONDS_IN_MS)
+        cy.get('.error').should('not.be.visible')
     })
     it('verifica número de telefone', function(){
+        cy.clock()
         cy.get('#firstName').type('Daniel')
         cy.get('#lastName').type("Winter")
         cy.get('#email').type('daniel_winter2009@yahoo.com.br')
@@ -35,8 +43,11 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.contains('button', 'Enviar').click()
 
         cy.get('.success').should('be.visible')
+        cy.tick(THREE_SECONDS_IN_MS)
+        cy.get('.success').should('not.be.visible')
     })
     it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function(){
+        cy.clock()
         cy.get('#firstName').type('Daniel')
         cy.get('#lastName').type("Winter")
         cy.get('#email').type('daniel_winter2009@yahoo.com.br')
@@ -46,8 +57,11 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.contains('button', 'Enviar').click()
 
         cy.get('.error').should('be.visible')
+        cy.tick(THREE_SECONDS_IN_MS)
+        cy.get('.error').should('not.be.visible')
     })
     it('preenche e limpa os campos nome, sobrenome, email e telefone', function(){
+        cy.clock()
         cy.get('#firstName').type('Daniel').should('have.value', 'Daniel').clear().should('have.value', '')
         cy.get('#lastName').type("Winter").should('have.value', 'Winter').clear().should('have.value', '')
         cy.get('#email').type('daniel_winter2009@yahoo.com.br').should('have.value', 'daniel_winter2009@yahoo.com.br').clear().should('have.value', '')
@@ -56,14 +70,18 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.contains('button', 'Enviar').click()
 
         cy.get('.error').should('be.visible')
+        cy.tick(THREE_SECONDS_IN_MS)
+        cy.get('.error').should('not.be.visible')
     })
     it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function(){
-        cy.contains('button', 'Enviar').click()
+        cy.clock()
+        cy.contains('button', 'Enviar').click()        
         cy.get('.error').should('be.visible')
+        cy.tick(THREE_SECONDS_IN_MS)
+        cy.get('.error').should('not.be.visible')
     })
     it('envia o formuário com sucesso usando um comando customizado', function(){
         cy.fillMandatoryFieldsAndSubmit()
-        cy.get('.success').should('be.visible')
     })
     it('seleciona um produto (YouTube) por seu texto', function(){
         cy.get('#product').select('YouTube').should('have.value', 'youtube')
