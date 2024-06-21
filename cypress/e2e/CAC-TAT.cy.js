@@ -10,7 +10,6 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     })
     
     it('preenche os campos obrigatórios e envia o formulário', function(){
-       
         const longText = Cypress._.repeat('Teste, ', 10)
         cy.clock()
         cy.get('#firstName').type('Daniel')
@@ -22,7 +21,6 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.tick(THREE_SECONDS_IN_MS)
         cy.get('.success').should('not.be.visible')
         
-
     })
     it('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', function(){
         cy.clock()
@@ -146,7 +144,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.contains('CAC TAT - Política de privacidade').should('be.visible')
     })
 
-    it.only('exibe e esconde as mensagens de sucesso e erro usando o .invoke()', function(){
+    it('exibe e esconde as mensagens de sucesso e erro usando o .invoke()', function(){
         cy.get('.success').should('not.be.visible')
             .invoke('show')
             .should('be.visible').and('contain', 'Mensagem enviada com sucesso.')
@@ -158,6 +156,19 @@ describe('Central de Atendimento ao Cliente TAT', function() {
             .invoke('hide')
             .should('not.be.visible')
         
+    })
+    it.only('preenche a area de texto usando o comando invoke', function(){
+        const longText = Cypress._.repeat('0123456789, ', 20)
+        cy.clock()
+        cy.get('#firstName').type('Daniel')
+        cy.get('#lastName').type("Winter")
+        cy.get('#email').type('daniel_winter2009@yahoo.com.br')
+        cy.get('#open-text-area').invoke('val', longText)
+        cy.get('#open-text-area').should('have.value', longText)
+        cy.contains('button', 'Enviar').click()
+        cy.get('.success').should('be.visible')
+        cy.tick(THREE_SECONDS_IN_MS)
+        cy.get('.success').should('not.be.visible')
     })
 })
  
