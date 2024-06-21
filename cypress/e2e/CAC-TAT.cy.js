@@ -177,6 +177,11 @@ describe('Central de Atendimento ao Cliente TAT', function() {
             expect(statusText).to.equal('OK')
             expect(body).to.include('CAC TAT')
         })
-      })
+    })
+    it.only('encontra o gato escondido', function(){
+        cy.get('#cat').should('not.be.visible').invoke('show').should('be.visible')
+        cy.get('#title').invoke('text', 'CAT TAT')
+        cy.get('#subtitle').invoke('text', 'Cat4TheWin')
+    })
 })
  
