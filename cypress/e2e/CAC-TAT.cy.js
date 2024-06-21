@@ -8,8 +8,10 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     it('verifica o título da aplicação', function() {
         cy.title().should('be.equal', 'Central de Atendimento ao Cliente TAT')
     })
-    it('preenche os campos obrigatórios e envia o formulário', function(){
-        const longText = 'Teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste.'
+    
+    it.only('preenche os campos obrigatórios e envia o formulário', function(){
+       
+        const longText = Cypress._.repeat('Teste, ', 10)
         cy.clock()
         cy.get('#firstName').type('Daniel')
         cy.get('#lastName').type("Winter")
@@ -19,6 +21,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('.success').should('be.visible')
         cy.tick(THREE_SECONDS_IN_MS)
         cy.get('.success').should('not.be.visible')
+        
 
     })
     it('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', function(){
